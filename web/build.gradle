@@ -1,9 +1,14 @@
 apply plugin: "war"
 apply plugin: "jetty"
 
+repositories {
+      mavenCentral()
+   }
 dependencies {
    compile project(":utils")
    compile "javax.servlet:servlet-api:2.5"
+   compile "joda-time:joda-time:2.9.4"
+
 }
 
 httpPort = 8080
