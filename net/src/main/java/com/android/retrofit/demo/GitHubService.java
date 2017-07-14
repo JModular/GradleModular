@@ -53,13 +53,6 @@ public interface GitHubService {
 	@POST("param")
 	Call<Object> paramPostBodyField(@Field("body") String title, @QueryMap Map<String, Object> param, @Query("userId") long id);
 
-	// 多个请求体body,未验证成功
-	// @Multipart
-	// @Headers("Content-type:application/json;charset=UTF-8")
-	// @POST("paramModel")
-	// Call<Object> paramModel(@Part() MultipartBody.Part model,@Part()
-	// MultipartBody.Part body,@Query("name") String name);
-
 	@Headers("Content-type:application/json;charset=UTF-8")
 	@POST("paramModel")
 	Call<Object> paramModel(@Body ErrorInfo<String> model, @Query("name") String name);

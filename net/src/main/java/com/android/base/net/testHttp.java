@@ -1,6 +1,9 @@
 package com.android.base.net;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -23,7 +26,7 @@ public class testHttp {
 			.header("Cookie", "abdclejdldj82jk23jfjd")// 全局请求头 //局部可累加
 			.header("Cache-control", "max-age=600")
 			.maxRetryCount(0)// 局部可覆盖
-			.isDebug(false)// 局部可覆盖
+			.isDebug(true)// 局部可覆盖
 			.retryTimeout(1000)// 局部可覆盖
 			.cacheFile(new File("C:/Cache"))// 局部可覆盖
 			.cacheFileSize(10240 * 1024)// 局部可覆盖
@@ -41,6 +44,42 @@ public class testHttp {
 		// testAPIBody("13266699268","刘");//发短信
 		testRetrofitImpl();
 		// testUploadFiles();
+
+		try {
+			testGithupApi();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// stars:>5+language:java+created:>=2000-12-14//okhttp方式支持
+	private static String q = "stars:>5+language:java+created:>=2000-12-14";// Retrofit不支持，需要解码
+	private static String sort = "stars";
+	private static String order = "desc";
+	private static String page = "1";
+	private static String per_page = "10";
+
+	public static void testGithupApi() throws UnsupportedEncodingException {
+		OkhttpUtils.println(URLEncoder.encode(q, "UTF-8"));
+		OkhttpUtils.println(URLDecoder.decode(q, "UTF-8"));
+		httpClient = httpClient.newBuilder().url("https://api.github.com/").httpBase(OkhttpImpl.getInstance()).build();
+		httpClient.Api().send(
+				new HttpClient.Builder()
+						.url("search/repositories")
+						.add("q", q)
+						.add("sort", sort)
+						.add("order", order)
+						.add("page", page)
+						.add("per_page", per_page)
+						.method(Method.GET)
+						.build(),
+				new NetResquestSubscriber<>(new SubscriberOnNextListener<Object>() {
+
+					@Override
+					public void onNext(Object t) {
+						OkhttpUtils.println("主线程：" + t.toString());
+					}
+				}));
 	}
 
 	private static void testAPIBody(String phone, String name) {
@@ -88,37 +127,13 @@ public class testHttp {
 	}
 
 	private static void testRetrofitImpl() {
-		// httpClient
-		// .Api()
-		// .send(new HttpClient.Builder()
-		// .url("postParam")// 子路径
-		// .add("param1", "value1")// 局部参数
-		// .add("param2", "value2")
-		// .add("param3", "value3")
-		// .header("cookies", "cookies")// 局部请求头
-		// .header(
-		// "Accept",
-		// "text/html,application/json,application/xml;q=0.9,image/webp,*/*;q=0.8")
-		// .header("Cookie", "android")// 局部请求头
-		// .header("Cookie", "java")// 局部请求头---同名请求会覆盖
-		// .header("header1", "header1")// 局部请求头
-		// .header("header2", "header2")// 局部请求头
-		// .method(Method.POST)
-		// .build(), new NetResquestSubscriber<Object>(new
-		// SubscriberOnNextListener<Object>() {
-		//
-		// @Override
-		// public void onNext(Object t) {
-		// OkhttpUtils.println(t.toString());
-		// }
-		// }));
-
 		httpClient
 				.Api()
 				.send(new HttpClient.Builder()
 						.url("getParam")// 子路径
 						.add("param3", "value1")// 局部参数
 						.add("param4", "value2")
+						.add("q", "stars:>5+language:java+created:>=2000-12-14")
 						.header("cookies", "cookies")// 局部请求头
 						.header(
 								"Accept",
@@ -136,7 +151,6 @@ public class testHttp {
 								OkhttpUtils.println(t.toString());
 							}
 						}));
-
 	}
 
 	/**
