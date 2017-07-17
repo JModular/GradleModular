@@ -1,1 +1,1 @@
-include ":utils",":web",":net"
+include ":utils",":web",":net","modular-rx","modular-design"

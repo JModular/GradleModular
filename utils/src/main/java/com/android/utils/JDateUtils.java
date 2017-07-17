@@ -60,6 +60,7 @@ public class JDateUtils {
      * @param end   08:30-12:30  [首 +中间值累加半小时 + 尾]
      * @return
      */
+	@Deprecated
     public static List<DataState> timeAddMuilt(String start, String end) {  
         List<DataState> result = new ArrayList<>();
         DataState dataState = new DataState();

@@ -2,7 +2,7 @@ apply plugin: "java"
 dependencies {
    compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    //����Junit
+    //Junit
     testCompile 'junit:junit:4.12'
     
     //okhttp3
