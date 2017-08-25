@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
-import com.android.base.net.HttpClient;
+import com.android.core.net.HttpClient;
 import com.android.retrofit.demo.OkhttpUtils;
 
 import okhttp3.FormBody;

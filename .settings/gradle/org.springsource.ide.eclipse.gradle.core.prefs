@@ -1,5 +1,5 @@
 #org.springsource.ide.eclipse.gradle.core.preferences.GradleProjectPreferences
-#Thu Jul 27 09:17:51 CST 2017
-build.family.org.gradle.tooling.model.eclipse.HierarchicalEclipseProject=;modular-design;modular-rx;net;utils;web;
+#Wed Aug 23 17:54:59 CST 2017
+build.family.org.gradle.tooling.model.eclipse.HierarchicalEclipseProject=;modular-design;modular-rx;modular-xmpp;net;utils;web;
 org.springsource.ide.eclipse.gradle.linkedresources=
 org.springsource.ide.eclipse.gradle.rootprojectloc=

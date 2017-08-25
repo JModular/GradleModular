@@ -20,7 +20,7 @@ import javax.net.ssl.X509TrustManager;
 import javax.xml.ws.http.HTTPException;
 
 import com.alibaba.fastjson.JSON;
-import com.android.base.net.HttpClient;
+import com.android.core.net.HttpClient;
 import com.android.core.utils.ExceptionUtils;
 import com.android.core.utils.RxBus;
 import com.android.retrofit.Interceptor.CustomLogger;

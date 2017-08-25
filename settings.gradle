@@ -1,1 +1,3 @@
 include ":utils",":web",":net","modular-rx","modular-design"
+
+include ":modular-xmpp"
