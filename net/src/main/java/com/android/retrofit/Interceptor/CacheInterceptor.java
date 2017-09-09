@@ -3,7 +3,7 @@ package com.android.retrofit.Interceptor;
 import java.io.IOException;
 
 import com.android.core.net.HttpClient.CacheType;
-import com.android.retrofit.demo.OkhttpUtils;
+import com.android.demo.OkhttpUtils;
 
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;

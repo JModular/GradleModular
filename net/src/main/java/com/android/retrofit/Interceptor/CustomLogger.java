@@ -1,6 +1,8 @@
 package com.android.retrofit.Interceptor;
 
-import com.android.retrofit.demo.OkhttpUtils;
+
+
+import com.android.demo.OkhttpUtils;
 
 import okhttp3.logging.HttpLoggingInterceptor.Logger;
 @Deprecated

@@ -3,8 +3,7 @@ package com.android.core.net;
 import java.util.concurrent.TimeUnit;
 
 import com.android.core.utils.RxjavaUtils;
-import com.android.retrofit.demo.OkhttpUtils;
-
+import com.android.demo.OkhttpUtils;
 
 import rx.Observable;
 import rx.Subscriber;

@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 
 import com.android.core.model.DownloadRepoMessageEvent;
-import com.android.retrofit.demo.OkhttpUtils;
+import com.android.demo.OkhttpUtils;
 
 import rx.Observable;
 import rx.Observer;

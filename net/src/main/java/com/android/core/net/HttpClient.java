@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.android.core.impl.RetrofitImpl;
+
 /**
  * @author Arison 使用构建者设计模式封装
  */
@@ -19,7 +21,7 @@ public class HttpClient {
 	private long writeTimeout;
 
 	private int method;// 方法
-	private String uploadFileKeys;//上传需要用到的key
+	private String uploadFileKeys;// 上传需要用到的key
 	private boolean isSyn;// 是否是同步
 	private int cacheType;// 缓存类型
 	private long cacheTime;// 缓存时间
@@ -49,7 +51,7 @@ public class HttpClient {
 		this.readTimeout = builder.readTimeout;
 		this.writeTimeout = builder.writeTimeout;
 		this.method = builder.method;
-		this.uploadFileKeys=builder.uploadFileKeys;
+		this.uploadFileKeys = builder.uploadFileKeys;
 		this.isSyn = builder.isSyn;
 		this.cacheType = builder.cacheType;
 		this.cacheTime = builder.cacheTime;
@@ -61,6 +63,17 @@ public class HttpClient {
 	}
 
 	private static HttpClient instance;
+
+	public static HttpClient getInstance() {
+		if (instance == null) {
+			synchronized (HttpClient.class) {
+				if (instance == null) {
+					instance = newInstance(new Builder());
+				}
+			}
+		}
+		return instance;
+	}
 
 	public static HttpClient getInstance(Builder builder) {
 		if (instance == null) {
@@ -80,11 +93,10 @@ public class HttpClient {
 	}
 
 	public Builder newBuilder() {
-		return new Builder(this);
+		Builder builder = new Builder(this);
+		return builder;
 	}
 
-	
-	
 	public static class Builder {
 
 		private String baseUrl;
@@ -94,7 +106,7 @@ public class HttpClient {
 		private long readTimeout;
 		private long writeTimeout;
 		private int method;// 方法
-		private String uploadFileKeys;//上传需要用到的key
+		private String uploadFileKeys;// 上传需要用到的key
 		private boolean isSyn;// 是否是同步
 		private int cacheType;// 缓存类型
 		private long cacheTime;// 缓存时间
@@ -107,6 +119,7 @@ public class HttpClient {
 
 		public Builder() {
 			this.method = Method.GET;
+			this.params.put("client", "Android Client");
 		}
 
 		public Builder(String url) {
@@ -130,7 +143,6 @@ public class HttpClient {
 			this.cacheFile = httpClient.getCacheFile();
 			this.maxRetryCount = httpClient.getMaxRetryCount();
 			this.httpBase = httpClient.Api();
-
 		}
 
 		public Builder url(String url) {
@@ -202,9 +214,9 @@ public class HttpClient {
 			this.method = method;
 			return this;
 		}
-		
-		public Builder filesKey(String key){
-			this.uploadFileKeys=key;
+
+		public Builder filesKey(String key) {
+			this.uploadFileKeys = key;
 			return this;
 		}
 
@@ -219,7 +231,7 @@ public class HttpClient {
 		}
 
 		public HttpClient build() {
-			HttpClient client = newInstance(this);
+			HttpClient client = build(false);
 			return client;
 		}
 
@@ -266,11 +278,11 @@ public class HttpClient {
 
 	// 关键代码
 	public HttpBase Api() {
-		// 设置全局参数
+		if (httpBase == null) {
+			httpBase = RetrofitImpl.getInstance();
+		}
 		httpBase.setBuilder(this);
-		// 设置具体实现库 初始化
 		httpBase.initClient();
-		//OkhttpUtils.println("您选择使用：" + httpBase.getClass().getSimpleName() + " 处理网络请求");
 		return httpBase;
 	}
 
@@ -323,8 +335,6 @@ public class HttpClient {
 		this.cacheFileSize = cacheFileSize;
 	}
 
-	
-	
 	public String getUploadFileKeys() {
 		return uploadFileKeys;
 	}
@@ -332,8 +342,6 @@ public class HttpClient {
 	public void setUploadFileKeys(String uploadFileKeys) {
 		this.uploadFileKeys = uploadFileKeys;
 	}
-
-
 
 	public static class Method {
 		public static int GET = 0;

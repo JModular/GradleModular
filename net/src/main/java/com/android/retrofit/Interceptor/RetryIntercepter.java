@@ -3,7 +3,7 @@ package com.android.retrofit.Interceptor;
 import java.io.IOException;
 import java.net.ConnectException;
 
-import com.android.retrofit.demo.OkhttpUtils;
+import com.android.demo.OkhttpUtils;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -33,7 +33,7 @@ public class RetryIntercepter implements Interceptor {
 		 }catch (ConnectException e) {
 				OkhttpUtils.println("服务器拒绝连接.....");
 		 }catch (IOException e) {
-			 OkhttpUtils.println("服务器拒绝连接.....");
+			    OkhttpUtils.println("服务器拒绝连接.....");
 		 }
 	      return response;
 	}

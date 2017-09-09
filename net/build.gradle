@@ -22,6 +22,8 @@ dependencies {
     compile group: 'org.json', name: 'json', version: '20160810'   //org.json
    
    
+   // https://mvnrepository.com/artifact/commons-lang/commons-lang
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
     compile group: 'commons-codec', name: 'commons-codec', version: '1.10'//https://mvnrepository.com/artifact/commons-codec/commons-codec
    
 }

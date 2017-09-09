@@ -2,5 +2,8 @@ subprojects {
    apply plugin : "java"
    repositories {
       mavenCentral()
+      maven {
+        url 'https://dl.bintray.com/appmodular/maven/'
+      }
    }
 }

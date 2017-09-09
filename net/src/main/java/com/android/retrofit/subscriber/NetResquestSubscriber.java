@@ -3,7 +3,7 @@ package com.android.retrofit.subscriber;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
-import com.android.retrofit.demo.OkhttpUtils;
+import com.android.demo.OkhttpUtils;
 
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;

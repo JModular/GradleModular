@@ -1,12 +1,13 @@
 package com.android.retrofit.Interceptor;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 import com.android.core.net.HttpClient;
-import com.android.retrofit.demo.OkhttpUtils;
+import com.android.demo.OkhttpUtils;
 
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
@@ -36,7 +37,7 @@ public class LogInterceptor implements Interceptor {
 						  .build();
 				  }
 			}
-			if (!params.isEmpty()) {
+			if (params!=null) {
 				  //get请求    添加公共参数
 				  if(request.method().equals("GET")){
 					  for (Map.Entry<String, Object> entry : params.entrySet()) {
@@ -56,7 +57,8 @@ public class LogInterceptor implements Interceptor {
 				                bodyBuilder.addEncoded(formBody.encodedName(i), formBody.encodedValue(i));
 				            }
 						  for (Map.Entry<String, Object> entry : params.entrySet()) {
-							   bodyBuilder.addEncoded(entry.getKey(), String.valueOf(entry.getValue()));
+							  postParm.put(entry.getKey(), String.valueOf(entry.getValue()));
+							  bodyBuilder.addEncoded(entry.getKey(), String.valueOf(entry.getValue()));
 						  }
 						  request = request.newBuilder().post(bodyBuilder.build()).build();
 					  }
@@ -74,7 +76,7 @@ public class LogInterceptor implements Interceptor {
         	  OkhttpUtils.println("|---------------日志打印  start---------------------------|");
     		  OkhttpUtils.println("请求头:"+JSON.toJSONString( response.request().headers().toMultimap()));
     		  OkhttpUtils.println("url:"+JSON.toJSONString(response.request().url().toString()));
-    		  OkhttpUtils.println("参数:"+JSON.toJSONString(postParm));
+    		  OkhttpUtils.println("参数:"+URLDecoder.decode(postParm.toString(),"UTF-8"));
     		  OkhttpUtils.println("结果:"+content);
     		  OkhttpUtils.println("|---------------日志打印   end---------------------------|");
 		}
