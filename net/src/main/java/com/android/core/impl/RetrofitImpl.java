@@ -2,6 +2,8 @@
 package com.android.core.impl;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.android.core.net.HttpBase;
@@ -17,6 +19,7 @@ import com.android.retrofit.converter.StringConverterFactory;
 import com.android.retrofit.service.ParamService;
 
 import okhttp3.Cache;
+import okhttp3.Cookie;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
@@ -38,6 +41,8 @@ public class RetrofitImpl extends HttpBase {
 
 	public Retrofit retrofit;
 	private static RetrofitImpl instance;
+	@SuppressWarnings("unused")
+	private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
 
 	public static RetrofitImpl getInstance() {
 		if (instance == null) {
@@ -63,7 +68,8 @@ public class RetrofitImpl extends HttpBase {
 
 		LogInterceptor logInterceptor = new LogInterceptor();
 		logInterceptor.setBuilder(mbuilder);
-		okBuilder.addInterceptor(logInterceptor);
+		//okBuilder.addInterceptor(logInterceptor);
+		okBuilder.addNetworkInterceptor(logInterceptor);
 		if (mbuilder.getCacheFileSize() != 0) {
 			okBuilder.cache(new Cache(mbuilder.getCacheFile(), mbuilder.getCacheFileSize()));
 			okBuilder.addInterceptor(
@@ -73,11 +79,11 @@ public class RetrofitImpl extends HttpBase {
 		// 后期缓存策略改进
 		switch (mbuilder.getCacheType()) {
 		case CacheType.ONLY_NETWORK:
-			OkhttpUtils.println("CacheType.ONLY_NETWORK");
+			//OkhttpUtils.println("CacheType.ONLY_NETWORK");
 
 			break;
 		case CacheType.ONLY_CACHED:
-			OkhttpUtils.println("CacheType.ONLY_CACHED");
+			//OkhttpUtils.println("CacheType.ONLY_CACHED");
 			// okBuilder.cache(new Cache(mbuilder.getCacheFile(),
 			// mbuilder.getCacheFileSize()));
 
@@ -110,7 +116,6 @@ public class RetrofitImpl extends HttpBase {
 	@Override
 	public void get(HttpClient builder, Subscriber<Object> s) {
 		ParamService paramService = initApi(ParamService.class);
-		System.err.println(""+builder.getBaseUrl()+""+builder.getParams()+""+builder.getHeaders());
 		Observable<Object> o = paramService.getParam(builder.getBaseUrl(), builder.getParams(), builder.getHeaders());
 		toSubscribe(o, s);
 
@@ -170,26 +175,7 @@ public class RetrofitImpl extends HttpBase {
 						if (++count <= mbuilder.getMaxRetryCount()) {
 							OkhttpUtils.println("请求异常：" + t.getMessage());
 							Observable<?> ob = Observable.timer(mbuilder.getRetryTimeout(), TimeUnit.MILLISECONDS);
-							// ob.subscribe(new Subscriber<Object>() {
-							//
-							// @Override
-							// public void onCompleted() {
-							//
-							//
-							// }
-							//
-							// @Override
-							// public void onError(Throwable e) {
-							// OkhttpUtils.println("onError:"+e);
-							//
-							// }
-							//
-							// @Override
-							// public void onNext(Object t) {
-							// OkhttpUtils.println("onNext:"+t);
-							//
-							// }
-							// });
+			
 							return ob;
 						}
 

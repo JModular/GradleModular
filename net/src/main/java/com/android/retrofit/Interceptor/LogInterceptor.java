@@ -23,6 +23,7 @@ public class LogInterceptor implements Interceptor {
 	@Override
 	public Response intercept(Chain chain) throws IOException {
 		  Request request = chain.request();
+		  request =request.newBuilder().removeHeader("User-Agent").build();
 		  Map<String, Object> headers=new HashMap<>();
 		  Map<String, Object> params=new HashMap<>();
 		  Map<String,Object> postParm=new HashMap<>();
@@ -66,7 +67,8 @@ public class LogInterceptor implements Interceptor {
 			}
 		  }
 		 
-	
+	     
+		  System.out.println("headers:"+JSON.toJSONString(request.headers().toString()));
 		  
 		  Response response = chain.proceed(request);
 		  okhttp3.MediaType mediaType = response.body().contentType();

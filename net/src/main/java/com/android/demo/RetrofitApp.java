@@ -48,18 +48,15 @@ public class RetrofitApp {
 	}
 
 	private static void runTask() {
-		// demo01();
+	
+		//retrofitRxjavaCall();
 
-		// demo2();
-
-		retrofitRxjavaCall();
-
-		// retrofitCall();
+		 retrofitCall();
 	}
 
 	private static void retrofitCall() {
 		@SuppressWarnings("deprecation")
-		Call<Object> repos = pService.getExceptionCall("/json");
+		Call<Object> repos = pService.getExceptionCall("json");
 		enqueueTask(repos);
 	}
 
@@ -90,27 +87,27 @@ public class RetrofitApp {
 		// }
 		// }, params);
 
-		// RetrofitUtils.getInstance().getApiPostData(new
-		// NetResquestSubscriber<Object>(new SubscriberOnNextListener<Object>()
-		// {
-		//
-		// @Override
-		// public void onNext(Object t) {
-		// OkhttpUtils.println(t.toString());
-		//
-		// }
-		// }),"/postParam", params);
+//		 RetrofitUtils.getInstance().getApiPostData(new
+//		 NetResquestSubscriber<Object>(new SubscriberOnNextListener<Object>()
+//		 {
+//		
+//		 @Override
+//		 public void onNext(Object t) {
+//		 OkhttpUtils.println(t.toString());
+//		
+//		 }
+//		 }),"/postParam/", params);
 
-		// RetrofitUtils.getInstance().getApiGetData(new
-		// NetResquestSubscriber<Object>(new SubscriberOnNextListener<Object>()
-		// {
-		//
-		// @Override
-		// public void onNext(Object t) {
-		// OkhttpUtils.println(t.toString());
-		//
-		// }
-		// }), "/getParam", params);
+		 RetrofitUtils.getInstance().getApiGetData(new
+		 NetResquestSubscriber<Object>(new SubscriberOnNextListener<Object>()
+		 {
+		
+		 @Override
+		 public void onNext(Object t) {
+		 OkhttpUtils.println(t.toString());
+		
+		 }
+		 }), "/getParam/", params);
 
 		// RetrofitUtils.getInstance().getApiGetExceptionData(new
 		// NetResquestSubscriber<>(new SubscriberOnNextListener<Object>() {
@@ -133,7 +130,7 @@ public class RetrofitApp {
 		// }
 		// }), "exception03");
 
-		uploadFiles(params);
+		//uploadFiles(params);
 
 	}
 

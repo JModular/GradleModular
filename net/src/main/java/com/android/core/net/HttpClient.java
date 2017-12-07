@@ -119,7 +119,8 @@ public class HttpClient {
 
 		public Builder() {
 			this.method = Method.GET;
-			this.params.put("client", "Android Client");
+			//this.params.put("client", "Android Client");
+			this.headers.put("client", "Android Client");
 		}
 
 		public Builder(String url) {
@@ -159,6 +160,13 @@ public class HttpClient {
 			this.headers.put(key, value);
 			return this;
 		}
+		
+		public Builder addHeaders(Map<String, Object> headers) {
+            if (headers != null) {
+                this.headers.putAll(headers);
+            }
+            return this;
+        }
 
 		public Builder retryTimeout(long time) {
 			this.retryTimeout = time;

@@ -71,10 +71,10 @@ public class RegexUtil {
 	
 	
 	public static void main(String[] args) {
-		
-	System.out.println(checkMobile("4001738721381"));
-	
-    	
+		//^[1][3,5,7,8][0-9]\\d{8}$
+	System.out.println(checkMobile("13907612611"));
+	System.out.println(checkRegex("13266699268","^[1][3,5,7,8][0-9]\\d{8}$"));	
+
 	}
 
 	
@@ -125,6 +125,7 @@ public class RegexUtil {
 		return Pattern.matches(regex, mobile);
 	}
 
+	//   String check = "^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
 	public static boolean checkPhone(String phone) {
 		String regex = "(\\+\\d+)?(\\d{3,4}\\-?)?\\d{7,8}$";
 		return Pattern.matches(regex, phone);

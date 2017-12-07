@@ -29,6 +29,7 @@ public class RxTimerUtil {
 				if(i==1500){
 					cancel();
 				}
+				
 			  System.out.println("任务开始执行........"+number);
 				
 			}

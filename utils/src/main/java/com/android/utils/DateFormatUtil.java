@@ -5,6 +5,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateFormatUtil {
+	
+    public static String getStrDate4Date(Date date, String format) {
+        if (date == null) {
+            return "";
+        } else {
+            SimpleDateFormat df = new SimpleDateFormat(format);
+            return df.format(date);
+        }
+    }
 
 	/**
 	 * add by gongtao

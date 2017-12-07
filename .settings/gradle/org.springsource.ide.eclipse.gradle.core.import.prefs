@@ -1,9 +1,9 @@
 #org.springsource.ide.eclipse.gradle.core.preferences.GradleImportPreferences
-#Thu Jul 27 09:18:13 CST 2017
+#Fri Mar 09 18:01:21 CST 2018
 addResourceFilters=true
 afterTasks=afterEclipseImport;
 beforeTasks=cleanEclipse;eclipse;
 enableAfterTasks=true
 enableBeforeTasks=true
 enableDependendencyManagement=true
-projects=modular-design;modular-rx;
+projects=modular-rx;

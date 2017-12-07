@@ -5,10 +5,16 @@ import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.functions.Action1;
-
+@SuppressWarnings("unused")
 public class RxMain {
 
 	public static void main(String[] args) {
+	
+	}
+	
+	
+
+	private static void test2(){
 	
 	}
 	
