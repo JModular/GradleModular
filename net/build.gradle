@@ -24,6 +24,8 @@ dependencies {
    
    // https://mvnrepository.com/artifact/commons-lang/commons-lang
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+    // https://mvnrepository.com/artifact/org.apache.commons/lang3
+compile 'org.apache.commons:commons-lang3:3.7'
     compile group: 'commons-codec', name: 'commons-codec', version: '1.10'//https://mvnrepository.com/artifact/commons-codec/commons-codec
    
 }

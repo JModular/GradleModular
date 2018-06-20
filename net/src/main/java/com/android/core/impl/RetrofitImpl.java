@@ -11,6 +11,7 @@ import com.android.core.net.HttpClient;
 import com.android.core.net.HttpClient.CacheType;
 import com.android.core.utils.DateFormatUtil;
 import com.android.core.utils.RxjavaUtils;
+import com.android.core.utils.StringUtils;
 import com.android.demo.OkhttpUtils;
 import com.android.retrofit.Interceptor.CacheInterceptor;
 import com.android.retrofit.Interceptor.LogInterceptor;
@@ -98,15 +99,18 @@ public class RetrofitImpl extends HttpBase {
 			break;
 		}
 
-		System.err.println(mbuilder.getBaseUrl());
-		OkHttpClient client = okBuilder.build();
-		retrofit = new Retrofit.Builder()
-				.client(client)
-				.baseUrl(mbuilder.getBaseUrl())
-				.addConverterFactory(StringConverterFactory.create())
-				.addConverterFactory(GsonConverterFactory.create())
-				.addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-				.build();
+		if(!StringUtils.isEmpty(mbuilder.getBaseUrl())){
+			System.err.println(mbuilder.getBaseUrl());
+			OkHttpClient client = okBuilder.build();
+			retrofit = new Retrofit.Builder()
+					.client(client)
+					.baseUrl(mbuilder.getBaseUrl())
+					.addConverterFactory(StringConverterFactory.create())
+					.addConverterFactory(GsonConverterFactory.create())
+					.addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+					.build();
+		}
+		
 	}
 
 	public <T> T initApi(Class<T> service) {

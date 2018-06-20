@@ -40,12 +40,12 @@ public class testHttp {
 			.httpBase(RetrofitImpl.getInstance())// 局部可覆盖
 			.build(true);// 保持单例
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnsupportedEncodingException {
 
 		// testAPIBody("17607612611","易女士");//发短信
-		// testAPIBody("13266699268","刘");//发短信
+	 testAPIBody("13266699268","刘");//发短信
 		//testRetrofitImpl();
-		 testUploadFiles();
+		
 
 
 	}
