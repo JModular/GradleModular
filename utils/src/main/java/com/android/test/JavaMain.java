@@ -19,70 +19,117 @@ import com.android.utils.JDateUtils;
 
 @SuppressWarnings("unused")
 public class JavaMain {
-
+	static byte totals[]=new byte[0];
 	public static void main(String[] args) {
-
-		String hex = "7e000f000008dcb6b69f00070008dcb6b69f72";
-		System.out.println("head:" + hex.substring(0, 2));
-		String command = hex.substring(20, 24);
-		String dataLength = hex.substring(2, 6);
-		System.out.println("十六进制 数据长度：" + dataLength);
-		System.out.println("长度：" + BytesUtils
-				.bytesToInt(BytesUtils.hexStringToBytes(dataLength), 0, 2));
-		System.err.println("数据长度：" + (BytesUtils.bytesToInt(
-				BytesUtils.hexStringToBytes(dataLength), 0, 2) - 9));
-		System.out.println("数据十六进制代码：" + hex.substring(24, 24 + 2 * 6));
-		System.out.println("数据十进制代码：" + BytesUtils.getByteToStr(
-				BytesUtils.hexStringToBytes(hex.substring(24, 24 + 2 * 6))));
-
-		String input = "0f0f";
-		System.out.println(
-				ArrayUtils.toString(BytesUtils.hexStringToBytes(input)));
-		System.out.println("校验和：" + ArrayUtils.toString(
-				BytesUtils.SumCheck(BytesUtils.hexStringToBytes(input), 1)));
-		System.out.println("校验和：十六：" + BytesUtils.bytesToHex(
-				BytesUtils.SumCheck(BytesUtils.hexStringToBytes(input), 1)));
-		String responseData = "00";
-		// 根据发送的数据来封装十六进制字符串格式数据
-		System.out.println("字节：" + (responseData.length() / 2 + 9));
-		System.out.println("字节：十六进制：" + BytesUtils.bytesToHex(
-				BytesUtils.intToBytes((responseData.length() / 2 + 9), 1)));
-		System.out.println("十进制："
-				+ BytesUtils.getByteToStr(BytesUtils.hexStringToBytes(input)));
-
-		// 十六进制数据 每隔两位加空格！
-		String res = "AE001E00112233445566000101000000020064000112011A103300010300640000CB";
-		String regex = "(.{2})";
-		res = res.replaceAll(regex, "$1 ");
-		System.out.println("数据命令：" + res);
-
-		// 十进制字符串转十六进制字符串
-		String username = "0815081213266699268";
-		System.out.println(
-				"字节：" + ArrayUtils.toString(BytesUtils.getBytes(username)));
-		System.out.println("十六进制字符串："
-				+ BytesUtils.bytesToHex(BytesUtils.getBytes(username)));
-		// 十六进制字符串转十进制字符串
-		String usernamehex = BytesUtils
-				.bytesToHex(BytesUtils.getBytes(username));
-		System.out.println("字节："
-				+ ArrayUtils.toString(BytesUtils.hexToBytes(usernamehex)));
-		System.out.println("十进制字符串："
-				+ BytesUtils.getString(BytesUtils.hexToBytes(usernamehex)));
-
-		// 以太网数据
-		System.out.println("服务器发送指令：" + getResponseCommand("08090904", "8007"));
-		// 串口数据
-		System.out.println("串口发送指令：" + getResponseCommand2("08090904", "8007"));
-
-		String hextest = "BE000A800304050808080808017D";
-		// 十六进制字符串不能直接转字节，切忌
-		System.out.println(
-				"hextest 字节：" + ArrayUtils.toString(hextest.getBytes()));
-		System.out.println("hextest 字节："
-				+ ArrayUtils.toString(BytesUtils.hexStringToBytes(hextest)));
-
-		parseHexData(getResponseCommand2("08090904", "8007"));
+		
+		//去零
+//		byte let[]=new byte[]{0x01,0x05,0,0,0,0,0,0,0,0,0,0,0,0,0,0};  //2
+//		byte let1[]=new byte[]{};
+//		byte tem[]=new byte[2];
+//		for(int i=0;i<2;i++){
+//			tem[i]=let[i];
+//		}
+//		System.out.println(ArrayUtils.toString(byteMerger(let1, tem)));
+//		System.out.println(subBytes(let, 0, 2));
+		
+		//汉字
+	
+			System.out.println(BytesUtils.bytesToHex("小老虎".getBytes()));
+			System.out.println(ArrayUtils.toString("小老虎".getBytes()));
+	
+	
+		
+		//长度
+//		String hexa="BE 00 14 00 01 00 00 00 00 00 00 00 00 00 00 01 02 00 02 02 01 01 01 DD";
+//		hexa=hexa.replace(" ", "");
+//		System.out.println(hexa);
+//		System.out.println("字节："+ArrayUtils.toString(BytesUtils.hexStringToBytes(hexa)));
+//		
+//		byte datas[]=BytesUtils.hexStringToBytes(hexa);
+//		
+//		
+//		byte leng[]=new byte[2];
+//		System.out.println(ArrayUtils.toString(datas[1]));
+//		System.out.println(ArrayUtils.toString(datas[2]));
+//		leng[0]=datas[1];
+//		leng[1]=datas[2];
+//		System.out.println(BytesUtils.bytesToInt(leng,0,2));
+		
+		
+		
+		
+//		byte data1[]=new byte[]{1,2};
+//		byte data2[]=new byte[]{3,4};
+//		byte data3[]=new byte[]{8,(byte)9,(byte) 0xaf,0x0F};
+//		
+//		totals=byteMerger(totals, data1);
+//		totals=byteMerger(totals, data2);
+//		totals=byteMerger(totals, data3);
+//	
+//		System.out.println(ArrayUtils.toString(totals));
+//		
+//
+//		String hex = "7e000f000008dcb6b69f00070008dcb6b69f72";
+//		System.out.println("head:" + hex.substring(0, 2));
+//		String command = hex.substring(20, 24);
+//		String dataLength = hex.substring(2, 6);
+//		System.out.println("十六进制 数据长度：" + dataLength);
+//		System.out.println("长度：" + BytesUtils
+//				.bytesToInt(BytesUtils.hexStringToBytes(dataLength), 0, 2));
+//		System.err.println("数据长度：" + (BytesUtils.bytesToInt(
+//				BytesUtils.hexStringToBytes(dataLength), 0, 2) - 9));
+//		System.out.println("数据十六进制代码：" + hex.substring(24, 24 + 2 * 6));
+//		System.out.println("数据十进制代码：" + BytesUtils.getByteToStr(
+//				BytesUtils.hexStringToBytes(hex.substring(24, 24 + 2 * 6))));
+//
+//		String input = "0f0f";
+//		System.out.println(
+//				ArrayUtils.toString(BytesUtils.hexStringToBytes(input)));
+//		System.out.println("校验和：" + ArrayUtils.toString(
+//				BytesUtils.SumCheck(BytesUtils.hexStringToBytes(input), 1)));
+//		System.out.println("校验和：十六：" + BytesUtils.bytesToHex(
+//				BytesUtils.SumCheck(BytesUtils.hexStringToBytes(input), 1)));
+//		String responseData = "00";
+//		// 根据发送的数据来封装十六进制字符串格式数据
+//		System.out.println("字节：" + (responseData.length() / 2 + 9));
+//		System.out.println("字节：十六进制：" + BytesUtils.bytesToHex(
+//				BytesUtils.intToBytes((responseData.length() / 2 + 9), 1)));
+//		System.out.println("十进制："
+//				+ BytesUtils.getByteToStr(BytesUtils.hexStringToBytes(input)));
+//
+//		// 十六进制数据 每隔两位加空格！
+//		String res = "AE001E00112233445566000101000000020064000112011A103300010300640000CB";
+//		String regex = "(.{2})";
+//		res = res.replaceAll(regex, "$1 ");
+//		System.out.println("数据命令：" + res);
+//
+//		// 十进制字符串转十六进制字符串
+//		String username = "02";
+//		System.out.println(
+//				"字节：" + ArrayUtils.toString(BytesUtils.getBytes(username)));
+//		System.out.println("十六进制字符串："
+//				+ BytesUtils.bytesToHex(BytesUtils.getBytes(username)));
+//		// 十六进制字符串转十进制字符串
+//		String usernamehex = BytesUtils
+//				.bytesToHex(BytesUtils.getBytes(username));
+//		System.out.println("字节："
+//				+ ArrayUtils.toString(BytesUtils.hexToBytes(usernamehex)));
+//		System.out.println("十进制字符串："
+//				+ BytesUtils.getString(BytesUtils.hexToBytes(usernamehex)));
+//
+//		// 以太网数据
+//		System.out.println("服务器发送指令：" + getResponseCommand("08090904", "8007"));
+//		// 串口数据
+//		System.out.println("串口发送指令：" + getResponseCommand2("08090904", "8007"));
+//
+//		String hextest = "BE000A800304050808080808017D";
+//		// 十六进制字符串不能直接转字节，切忌
+//		System.out.println(
+//				"hextest 字节：" + ArrayUtils.toString(hextest.getBytes()));
+//		System.out.println("hextest 字节："
+//				+ ArrayUtils.toString(BytesUtils.hexStringToBytes(hextest)));
+//
+//		parseHexData(getResponseCommand2("08090904", "8007"));
 
 	}
 
@@ -139,7 +186,7 @@ public class JavaMain {
 		String xiaoyanhe = result + "59";
 		// 计算校验和 (一个字节)
 		String sum = BytesUtils.bytesToHex(
-				BytesUtils.SumCheck(BytesUtils.hexStringToBytes(xiaoyanhe), 1));
+				BytesUtils.sumCheck(BytesUtils.hexStringToBytes(xiaoyanhe), 1));
 		System.out.println("校验和：" + sum);
 		result = result + sum;
 		return result;
@@ -163,7 +210,7 @@ public class JavaMain {
 		String xiaoyanhe = result;
 		// 计算校验和 (一个字节)
 		String sum = BytesUtils.bytesToHex(
-				BytesUtils.SumCheck(BytesUtils.hexStringToBytes(xiaoyanhe), 1));
+				BytesUtils.sumCheck(BytesUtils.hexStringToBytes(xiaoyanhe), 1));
 		System.out.println("校验和：" + sum);
 		result = result + sum;
 		return result;
@@ -372,5 +419,19 @@ public class JavaMain {
 
 		// System.out.println(JDateUtils.daysToNewYear());
 	}
+	
+	//java 合并两个byte数组  
+    public static byte[] byteMerger(byte[] byte_1, byte[] byte_2){  
+        byte[] byte_3 = new byte[byte_1.length+byte_2.length];  
+        System.arraycopy(byte_1, 0, byte_3, 0, byte_1.length);  
+        System.arraycopy(byte_2, 0, byte_3, byte_1.length, byte_2.length);  
+        return byte_3;  
+    }  
+
+    public static byte[] subBytes(byte[] src, int begin, int count) {
+        byte[] bs = new byte[count];
+        System.arraycopy(src, begin, bs, 0, count);
+        return bs;
+    }
 
 }

@@ -131,6 +131,7 @@ public class RetrofitImpl extends HttpBase {
 		Observable<Object> o;
 		if (builder.getParams().containsKey("body")) {
 			// body提交
+			System.out.println("body方式提交----------");
 			o = paramService.postBody(
 					builder.getBaseUrl(),
 					builder.getParams().get("body"),

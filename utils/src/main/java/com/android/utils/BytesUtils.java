@@ -886,7 +886,7 @@ public class BytesUtils {
 	 *            校验和位数
 	 * @return 计算出的校验和数组
 	 */
-	public static byte[] SumCheck(byte[] msg, int length) {
+	public static byte[] sumCheck(byte[] msg, int length) {
 		long mSum = 0;
 		byte[] mByte = new byte[length];
 
@@ -925,5 +925,33 @@ public class BytesUtils {
 		}
 		return str.toString();
 	}
+	
+	 /**
+	  * 合并字节数组
+	 * @param byte_1
+	 * @param byte_2
+	 * @return
+	 */
+	public static byte[] byteMerger(byte[] byte_1, byte[] byte_2){  
+	        byte[] byte_3 = new byte[byte_1.length+byte_2.length];  
+	        System.arraycopy(byte_1, 0, byte_3, 0, byte_1.length);  
+	        System.arraycopy(byte_2, 0, byte_3, byte_1.length, byte_2.length);  
+	        return byte_3;  
+	    }  
+	
+	
+	/**
+	 * 截取字节数组指定长度
+	 * @param src
+	 * @param begin
+	 * @param count
+	 * @return
+	 */
+	public static byte[] subBytes(byte[] src, int begin, int count) {
+        byte[] bs = new byte[count];
+        System.arraycopy(src, begin, bs, 0, count);
+        return bs;
+    }
+
 
 }
