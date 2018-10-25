@@ -1,6 +1,7 @@
 package com.android.api;
 
 import java.io.File;
+import java.util.HashMap;
 
 import com.alibaba.fastjson.JSON;
 import com.android.core.net.HttpClient;
@@ -22,20 +23,78 @@ public class RetrofitApi {
     
 	String url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbc1f8607137d3b8a&"
 			+ "redirect_uri="
-			+ "http://qq784602719.imwork.net/wxlogin&response_type=code&scope=SCOPE&state=STATE#wechat_redirect";
+			+ "http://qq784602719.imwork.net/Sockets/wxlogin&response_type=code&scope=SCOPE&state=STATE#wechat_redirect";
 	String loginurl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbc1f8607137d3b8a&redirect_uri=http%3a%2f%2fqq784602719.imwork.net%2fwxlogin&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+	//http%3a%2f%2fqq784602719.imwork.net%2fSockets%2fwxlogin
+	String loginurl1="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbc1f8607137d3b8a&redirect_uri=http%3a%2f%2fqq784602719.imwork.net%2fwxService%2fwxlogin&response_type=code&scope=snsapi_userinfo&state=13266699268#wechat_redirect";
 	
-	
-	static String openId="o8lZ9uFG2FswQt_kPkBu2G_ac2TU";
-	//o8lZ9uGnn074M2wiP_5cWsZ3NL8s
-	//o8lZ9uIQ41kV_1_wimarsRSuCH98
+	String login2="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbc1f8607137d3b8a&redirect_uri=https%3a%2f%2fwww.akuiguoshu.com%2fwxService%2fwxlogin&response_type=code&scope=snsapi_userinfo&state=13266699268#wechat_redirect";
+	static String openId="o8lZ9uGnn074M2wiP_5cWsZ3NL8s";
+	//o8lZ9uGnn074M2wiP_5cWsZ3NL8s  我的
+	//o8lZ9uIQ41kV_1_wimarsRSuCH98  
 	//o8lZ9uFsI8dHoh4-Kf-EI8babwj4
-	//o8lZ9uL7H-1nWjGk1awUJdyh_9Rg
+	//o8lZ9uL7H-1nWjGk1awUJdyh_9Rg  
 	//o8lZ9uFG2FswQt_kPkBu2G_ac2TU  小燕子
 	
 	//o8lZ9uIQ41kV_1_wimarsRSuCH98
 	public static void main(String[] args) {
-		getAcessToken(openId);
+//		getAcessToken(openId);
+//		wxPush();
+		requestHttps();
+		//https://218.17.158.219:9443/uas/mobile/login.action
+	}
+	
+	
+	public static void requestHttps(){
+		HttpClient httpClient = new HttpClient.Builder("https://218.17.158.219:9443/uas/").isDebug(false)
+				.connectTimeout(5000)
+				.readTimeout(5000)
+				.build();
+		HashMap<String,Object> map=new HashMap<>();
+//		map.put("title", "我喜欢你，小燕子");
+//		map.put("time", "有本事就回我啊！");
+//		map.put("content", "哈哈哈哈哈哈哈");
+		System.out.println(JSON.toJSONString(map));
+		httpClient.Api().send(new HttpClient.Builder().url("mobile/login.action")
+				.add("phone", "13266699268")
+				.add("url", "https://www.baidu.com")
+				.add("fieldMap", JSON.toJSONString(map))
+//				.httpBase(OkhttpImpl.getInstance())
+				.method(Method.POST)
+				.build(), new ResultSubscriber<>(new ResultListener<Object>() {
+
+					@Override
+					public void onResponse(Object t) {
+						System.out.println(t);
+                 
+					}
+				}));
+	}
+	
+	public static void wxPush(){
+		HttpClient httpClient = new HttpClient.Builder("https://www.akuiguoshu.com/wxService/").isDebug(false)
+				.connectTimeout(5000)
+				.readTimeout(5000)
+				.build();
+		HashMap<String,Object> map=new HashMap<>();
+		map.put("title", "我喜欢你，小燕子");
+		map.put("time", "有本事就回我啊！");
+		map.put("content", "哈哈哈哈哈哈哈");
+		System.out.println(JSON.toJSONString(map));
+		httpClient.Api().send(new HttpClient.Builder().url("wxPush")
+				.add("phone", "13266699268")
+				.add("url", "https://www.baidu.com")
+				.add("fieldMap", JSON.toJSONString(map))
+				.httpBase(OkhttpImpl.getInstance())
+				.method(Method.POST)
+				.build(), new ResultSubscriber<>(new ResultListener<Object>() {
+
+					@Override
+					public void onResponse(Object t) {
+						System.out.println(t);
+                 
+					}
+				}));
 	}
 
 	public static void getAcessToken(String openid){
@@ -107,8 +166,15 @@ public class RetrofitApi {
 	
 	public static void getSendMsgTemple(String openid ,String access_token){
 		String json="{\"touser\":\""+openid+"\",\"template_id\":\"oi4SokVV7Is0kZz5w8VJG1b3zrLWtApqftCN4iJ3Iyc\","
-				+ "\"url\":\""+"http://qq784602719.imwork.net/html/welcome.html"+"\","
-				+ "\"data\":{\"first\":{\"value\":\"刘杰向您提交了请假条！\",\"color\":\"#173177\"},\"keyword1\":{\"value\":\"骑车去旅行\",\"color\":\"#173177\"},\"keyword2\":{\"value\":\"事假\",\"color\":\"#173177\"},\"keyword3\":{\"value\":\"2018年09月30日 12:00到18:00\",\"color\":\"#173177\"},\"keyword4\":{\"value\":\"半天\",\"color\":\"#173177\"},\"remark\":{\"value\":\"点击模板URL进入调转界面！！！\",\"color\":\"#173177\"}}}";
+				+ "\"url\":\""+"http://www.aliyunyh.com/480.html"+"\","
+				+ "\"data\":{"
+				+ "\"first\":{\"value\":\"刘杰向您提交了请假条！\","
+				+"\"color\":\"#173177\"},"
+				+ "\"keyword1\":{\"value\":\"骑车去旅行\",\"color\":\"#173177\"},"
+				+ "\"keyword2\":{\"value\":\"事假\",\"color\":\"#173177\"},"
+				+ "\"keyword3\":{\"value\":\"2018年09月30日 12:00到18:00\",\"color\":\"#173177\"},"
+				+ "\"keyword4\":{\"value\":\"半天\",\"color\":\"#173177\"},"
+				+ "\"remark\":{\"value\":\"点击模板URL进入调转界面！！！\",\"color\":\"#173177\"}}}";
 		HttpClient httpClient = new HttpClient.Builder("https://api.weixin.qq.com/").isDebug(true)	
 				.build();
 		httpClient.Api().send(new HttpClient.Builder()
