@@ -1,6 +1,11 @@
 package com.android.api;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
 
 import com.alibaba.fastjson.JSON;
@@ -38,12 +43,38 @@ public class RetrofitApi {
 	
 	//o8lZ9uIQ41kV_1_wimarsRSuCH98
 	public static void main(String[] args) {
-//		getAcessToken(openId);
-//		wxPush();
-		requestHttps();
-		//https://218.17.158.219:9443/uas/mobile/login.action
+		//wxPush();
+		getURLEncodeStr();
+	}
+
+
+
+
+	private static void getURLEncodeStr() {
+		String uasUrl="http://192.168.253.6/uas/";
+		String uasPhone="13510107574";
+		String uasPassword="a1111111";
+		String uasMaster="UAS";
+	/*	try {
+			uasUrl=URLEncoder.encode(uasUrl, "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}*/
+		String jsonParam="{\"phone\":\""+uasPhone+"\",\"password\":\""+uasPassword+"\",\"master\":\""+uasMaster+"\",\"nodeId\":59180421,\"baseUrl\":\""+uasUrl+"\"}";
+		try {
+			jsonParam=URLEncoder.encode(jsonParam, "utf-8");
+			
+			uasUrl=URLEncoder.encode(uasUrl,"utf-8");//http%3A%2F%2F192.168.253.6%2Fuas%2F
+			//uasUrl=URLEncoder.encode(uasUrl,"utf-8");//http%253A%252F%252F192.168.253.6%252Fuas%252F
+			System.out.println("uasUrl:"+uasUrl);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		System.out.println(jsonParam);
 	}
 	
+	
+
 	
 	public static void requestHttps(){
 		HttpClient httpClient = new HttpClient.Builder("https://218.17.158.219:9443/uas/").isDebug(false)
@@ -77,14 +108,21 @@ public class RetrofitApi {
 				.readTimeout(5000)
 				.build();
 		HashMap<String,Object> map=new HashMap<>();
-		map.put("title", "我喜欢你，小燕子");
-		map.put("time", "有本事就回我啊！");
-		map.put("content", "哈哈哈哈哈哈哈");
+		map.put("title", "测试消息");
+		map.put("time", "测试消息");
+		map.put("content", "测试消息");
+		HashMap<String,Object> urlmap=new HashMap<>();
+		urlmap.put("url", "https://demo.usoftchina.com:9443/uas/");
+		urlmap.put("phone", "13510107574");
+		urlmap.put("password", "a1111111");
+		urlmap.put("master", "UAS");
+		urlmap.put("nodeId", 59490196);
 		System.out.println(JSON.toJSONString(map));
 		httpClient.Api().send(new HttpClient.Builder().url("wxPush")
 				.add("phone", "13266699268")
 				.add("url", "https://www.baidu.com")
 				.add("fieldMap", JSON.toJSONString(map))
+				.add("urlParam", JSON.toJSONString(urlmap))
 				.httpBase(OkhttpImpl.getInstance())
 				.method(Method.POST)
 				.build(), new ResultSubscriber<>(new ResultListener<Object>() {
