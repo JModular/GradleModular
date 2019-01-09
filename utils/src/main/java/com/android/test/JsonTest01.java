@@ -6,27 +6,36 @@ import java.util.List;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.android.model.ContactsBean;
+import com.android.utils.ImgUtil;
 
 public class JsonTest01 {
 
 	public static void main(String[] args) {
-		 String hex="{\"contacts\":[{\"companyName\":\"ÉîÛÚÊĞÓÅÈí¿Æ¼¼ÓĞÏŞ¹«Ë¾\",\"name\":\"ÕÅÈı\",\"sex\":\"ÄĞ\",\"age\":25,\"position\":\"²ÆÎñ¾­Àí\",\"department\":\"²ÆÎñ²¿\",\"brithday\":\"1992-08-17\",\"phone\":\"13266699268\",\"isDMakers\":1,\"notes\":\"ÌØÊâ¿Í»§\"},{\"companyName\":\"ÉîÛÚÊĞÓÅÈí¿Æ¼¼ÓĞÏŞ¹«Ë¾\",\"name\":\"ÕÅÈı\",\"sex\":\"ÄĞ\",\"age\":25,\"position\":\"²ÆÎñ¾­Àí\",\"department\":\"²ÆÎñ²¿\",\"brithday\":\"1992-08-17\",\"phone\":\"13266699268\",\"isDMakers\":1,\"notes\":\"ÌØÊâ¿Í»§\"}]}";
-	       
-		  System.out.println("contacts:"+JSON.parseObject(hex).getJSONArray("contacts").toJSONString());
-		  ArrayList<ContactsBean> datas= JSON.parseObject(JSON.parseObject(hex).getJSONArray("contacts").toJSONString()
-	        ,new TypeReference<ArrayList<ContactsBean>>(){});
-	        
-	        System.out.println("datas:"+JSON.toJSONString(datas));
-	        
-
-	        //½âÎöjson×Ö·û´®  
-            List<ContactsBean> ContactsBean2 = JSON.parseArray(JSON.parseObject(hex).getJSONArray("contacts").toJSONString(),ContactsBean.class); 
-	
-            System.out.println("datas:"+JSON.toJSONString(ContactsBean2));
+		String react=ImgUtil.imgToBaseStr("C:\\Users\\Arison\\Desktop\\yundashi\\6.jpg");
+	   System.out.println(react);
+	   
+	   ImgUtil.baseStrToImg(react, "C:\\Users\\Arison\\Desktop\\8.jpg");
+	 
 	}
-	
-	
 
+	private static void testjson() {
+		String hex = "{\"contacts\":[{\"companyName\":\"æ·±åœ³å¸‚ä¼˜è½¯ç§‘æŠ€æœ‰é™å…¬å¸\",\"name\":\"å¼ ä¸‰\",\"sex\":\"ç”·\",\"age\":25,\"position\":\"è´¢åŠ¡ç»ç†\",\"department\":\"è´¢åŠ¡éƒ¨\",\"brithday\":\"1992-08-17\",\"phone\":\"13266699268\",\"isDMakers\":1,\"notes\":\"ç‰¹æ®Šå®¢æˆ·\"},{\"companyName\":\"æ·±åœ³å¸‚ä¼˜è½¯ç§‘æŠ€æœ‰é™å…¬å¸\",\"name\":\"å¼ ä¸‰\",\"sex\":\"ç”·\",\"age\":25,\"position\":\"è´¢åŠ¡ç»ç†\",\"department\":\"è´¢åŠ¡éƒ¨\",\"brithday\":\"1992-08-17\",\"phone\":\"13266699268\",\"isDMakers\":1,\"notes\":\"ç‰¹æ®Šå®¢æˆ·\"}]}";
 
+		System.out.println("contacts:" + JSON.parseObject(hex)
+				.getJSONArray("contacts").toJSONString());
+		ArrayList<ContactsBean> datas = JSON.parseObject(
+				JSON.parseObject(hex).getJSONArray("contacts").toJSONString(),
+				new TypeReference<ArrayList<ContactsBean>>() {
+				});
+
+		System.out.println("datas:" + JSON.toJSONString(datas));
+
+		// è§£æjsonå­—ç¬¦ä¸²
+		List<ContactsBean> ContactsBean2 = JSON.parseArray(
+				JSON.parseObject(hex).getJSONArray("contacts").toJSONString(),
+				ContactsBean.class);
+
+		System.out.println("datas:" + JSON.toJSONString(ContactsBean2));
+	}
 
 }

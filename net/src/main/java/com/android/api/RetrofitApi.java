@@ -43,8 +43,8 @@ public class RetrofitApi {
 	
 	//o8lZ9uIQ41kV_1_wimarsRSuCH98
 	public static void main(String[] args) {
-		//wxPush();
-		getURLEncodeStr();
+		wxPush();
+		//getURLEncodeStr();
 	}
 
 
@@ -113,13 +113,14 @@ public class RetrofitApi {
 		map.put("content", "测试消息");
 		HashMap<String,Object> urlmap=new HashMap<>();
 		urlmap.put("url", "https://demo.usoftchina.com:9443/uas/");
-		urlmap.put("phone", "13510107574");
-		urlmap.put("password", "a1111111");
+		urlmap.put("phone", "13430818775");
+		urlmap.put("password", "lv888888");
 		urlmap.put("master", "UAS");
 		urlmap.put("nodeId", 59490196);
 		System.out.println(JSON.toJSONString(map));
 		httpClient.Api().send(new HttpClient.Builder().url("wxPush")
 				.add("phone", "13266699268")
+				.add("pushType", "process")
 				.add("url", "https://www.baidu.com")
 				.add("fieldMap", JSON.toJSONString(map))
 				.add("urlParam", JSON.toJSONString(urlmap))
