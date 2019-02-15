@@ -1,8 +1,11 @@
 apply plugin: "java"
 dependencies {
 
+    // https://mvnrepository.com/artifact/commons-codec/commons-codec
+   compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
+  
 
-  compile 'org.apache.commons:commons-lang3:3.7'
+   compile 'org.apache.commons:commons-lang3:3.7'
    compile "joda-time:joda-time:2.9.4"
    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.24'
    

@@ -5,6 +5,9 @@ dependencies {
     //Junit
     testCompile 'junit:junit:4.12'
     
+    //网络请求
+   compile group: 'com.github.kevinsawicki', name: 'http-request', version: '6.0'
+    
     //okhttp3
     compile 'com.squareup.okhttp3:okhttp:3.4.1' 
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
@@ -25,7 +28,7 @@ dependencies {
    // https://mvnrepository.com/artifact/commons-lang/commons-lang
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
     // https://mvnrepository.com/artifact/org.apache.commons/lang3
-compile 'org.apache.commons:commons-lang3:3.7'
+    compile 'org.apache.commons:commons-lang3:3.7'
     compile group: 'commons-codec', name: 'commons-codec', version: '1.10'//https://mvnrepository.com/artifact/commons-codec/commons-codec
    
 }

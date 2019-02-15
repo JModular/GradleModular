@@ -1,4 +1,4 @@
-package com.android.utils;
+package com.android.api;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -49,7 +49,7 @@ public class ImgUtil {
             e.printStackTrace();
         }
         // 对字节数组Base64编码
-        return Base64.getEncoder().encodeToString(data); // 返回Base64编码过的字节数组字符
+        return Base64.getMimeEncoder().encodeToString(data); // 返回Base64编码过的字节数组字符
     }
 }
 

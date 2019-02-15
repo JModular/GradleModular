@@ -11,13 +11,32 @@ import com.android.utils.ImgUtil;
 public class JsonTest01 {
 
 	public static void main(String[] args) {
-		String react=ImgUtil.imgToBaseStr("C:\\Users\\Arison\\Desktop\\yundashi\\6.jpg");
-	   System.out.println(react);
+		String react=ImgUtil.imgToBaseStr("C:\\Users\\Arison\\Desktop\\stuPhoto\\xiaofang.jpg");
+	    System.out.println(react);
 	   
-	   ImgUtil.baseStrToImg(react, "C:\\Users\\Arison\\Desktop\\8.jpg");
+  
+	   ImgUtil.baseStrToImg(react, "C:\\Users\\Arison\\Desktop\\liujie0.jpg");
 	 
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private static void testjson() {
 		String hex = "{\"contacts\":[{\"companyName\":\"深圳市优软科技有限公司\",\"name\":\"张三\",\"sex\":\"男\",\"age\":25,\"position\":\"财务经理\",\"department\":\"财务部\",\"brithday\":\"1992-08-17\",\"phone\":\"13266699268\",\"isDMakers\":1,\"notes\":\"特殊客户\"},{\"companyName\":\"深圳市优软科技有限公司\",\"name\":\"张三\",\"sex\":\"男\",\"age\":25,\"position\":\"财务经理\",\"department\":\"财务部\",\"brithday\":\"1992-08-17\",\"phone\":\"13266699268\",\"isDMakers\":1,\"notes\":\"特殊客户\"}]}";
 
